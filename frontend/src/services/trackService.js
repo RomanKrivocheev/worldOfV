@@ -1,4 +1,4 @@
-export const trackData = async (page) => {
+export const trackData = async (page, artistName, genreName) => {
     try {
       const response = await fetch('http://localhost:3000/graphql', {
         method: 'POST',
@@ -19,12 +19,12 @@ export const trackData = async (page) => {
           `,
           variables: {
             input: {
-              artistName: 'Aerosmith',
-              genreName: 'Rock',
+              artistName,
+              genreName,
               minPrice: 0,
               maxPrice: 100,
               page,
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }),
