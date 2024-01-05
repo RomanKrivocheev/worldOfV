@@ -1,0 +1,30 @@
+// Should do this as a service to fetch the available genres from the database once.
+const genres = [
+    'Rock',
+    'Jazz',
+    'Metal',
+    'Alternative & Punk',
+    'Rock And Roll',
+    'Blues',
+    'Latin',
+    'Reggae',
+    'Pop',
+    'Soundtrack',
+    'Bossa Nova',
+    'Easy Listening',
+    'Heavy Metal',
+    'R&B/Soul',
+    'Electronica/Dance',
+    'World',
+    'Hip Hop/Rap',
+    'Science Fiction',
+    'TV Shows',
+    'Sci Fi & Fantasy',
+    'Drama',
+    'Comedy',
+    'Alternative',
+    'Classical',
+    'Opera',
+  ];
+  
+  export default genres;  
