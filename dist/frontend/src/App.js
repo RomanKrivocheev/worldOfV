@@ -14,11 +14,11 @@ const App = () => {
     const [hasMore, setHasMore] = (0, react_1.useState)(false);
     const handleLoadMore = async (firstSearch) => {
         let newTracks = [], newHasMore;
-        if (firstSearch && searchData.artistName !== currentSearchData.artistName && searchData.genreName !== currentSearchData.genreName) {
+        if (firstSearch && (searchData.artistName !== currentSearchData.artistName || searchData.genreName !== currentSearchData.genreName)) {
+            setTracks([]);
             ({ tracks: newTracks, hasMore: newHasMore } = await (0, trackService_1.trackData)(0, searchData.artistName, searchData.genreName));
             setPage(0);
             setCurrentSearchData({ artistName: searchData.artistName, genreName: searchData.genreName });
-            setTracks([]);
         }
         else {
             ({ tracks: newTracks, hasMore: newHasMore } = await (0, trackService_1.trackData)(page + 1, searchData.artistName, searchData.genreName));

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Track } from '../../src/track.model';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -9,22 +9,22 @@ import './App.css';
 const App = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [searchData, setSearchData] = useState({ artistName: '', genreName: '' });
-  const [currentSearchData, setCurrentSearchData] = useState({artistName: '', genreName: '' });
+  const [currentSearchData, setCurrentSearchData] = useState({ artistName: '', genreName: '' });
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(false);
 
   const handleLoadMore = async (firstSearch: boolean) => {
     let newTracks: Track[] = [], newHasMore;
-  
-    if (firstSearch && searchData.artistName !== currentSearchData.artistName && searchData.genreName !== currentSearchData.genreName) {
+
+    if (firstSearch && (searchData.artistName !== currentSearchData.artistName || searchData.genreName !== currentSearchData.genreName)) {
+      setTracks([]);
       ({ tracks: newTracks, hasMore: newHasMore } = await trackData(0, searchData.artistName, searchData.genreName));
       setPage(0);
-      setCurrentSearchData({artistName: searchData.artistName , genreName: searchData.genreName});
-      setTracks([]);
+      setCurrentSearchData({ artistName: searchData.artistName, genreName: searchData.genreName });
     } else {
       ({ tracks: newTracks, hasMore: newHasMore } = await trackData(page + 1, searchData.artistName, searchData.genreName));
     }
-  
+
     if (newTracks.length > 0) {
       setTracks((prevTracks) => [...prevTracks, ...newTracks]);
       setPage((prevPage) => prevPage + 1);
@@ -33,8 +33,6 @@ const App = () => {
       setHasMore(false);
     }
   };
-  
-  
 
   return (
     <div className="App">
